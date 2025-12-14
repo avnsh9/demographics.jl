@@ -1,3 +1,3 @@
 var documenterSearchIndex = {"docs":
-[{"location":"#demographics","page":"Home","title":"demographics","text":"Documentation for demographics.\n\n","category":"section"}]
+[{"location":"#demographics","page":"Home","title":"demographics","text":"Documentation for demographics.\n\n","category":"section"},{"location":"#demographics.demographics","page":"Home","title":"demographics.demographics","text":"Demographics package for simulating stellar and planetary systems.\n\n\n\n\n\n","category":"module"},{"location":"#demographics.hr_cdpp-Tuple{Any}","page":"Home","title":"demographics.hr_cdpp","text":"hr_cdpp(T)\n\nArguments\n\nT::Float64: TESS magnitude of the star.\n\nReturns\n\nFloat64: 1-hour CDPP in ppm.\n\nDescription\n\nCalculate one hour CDPP to get detectibility metric for TESS data.\nEquation 1 from Kunimoto et al. (2022).\n\n\n\n\n\n","category":"method"}]
 }
