@@ -15,8 +15,6 @@ hr_cdpp(T)
 - Equation 1 from Kunimoto et al. (2022).
 """
 function hr_cdpp(T)
-    C0 = 50.2
-    C1 = 97.4
-    C2 = 92.9
-    return C0 + C1*10^(0.2*(T-10)) + C2*10^(0.4(T-10))
+    
+    return C0 + C1*10^(0.2*(T-10)) + C2*10^(0.4*(T-10))
 end
