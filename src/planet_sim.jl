@@ -92,3 +92,59 @@ with mean ⟨N⟩.
 function draw_num_planets(meanN::Float64)
     return rand(Poisson(meanN))
 end
+
+
+"""
+    draw_orbital_eccentricity(N,α,β) -> e_array
+
+# Arguments
+- `N::Int`: Number of planets.
+- `α::Float64`: Alpha parameter for the Beta distribution.
+- `β::Float64`: Beta parameter for the Beta distribution.
+
+# Returns
+- `e_array`: Array of orbital eccentricities for the planets.
+
+# Description
+Draw orbital eccentricities for N planets from a Beta distribution with parameters α and β. Van Eylen & Albrecht
+2015
+"""
+function draw_orbital_eccentricity(N::Int, α::Float64, β::Float64)
+    e_array = rand(Beta(α, β), N)
+    return e_array
+end
+
+"""
+    draw_periastron angle(N) -> ω_array
+
+# Arguments
+- `N::Int`: Number of planets.
+
+# Returns
+- `ω_array`: Array of periastron angles for the planets.
+
+# Description
+Draw periastron angles for N planets from a uniform distribution between -π and π
+"""
+function draw_periastron_angle(N::Int)
+    ω_array = rand(Uniform(-π, π), N)
+    return ω_array
+end
+
+"""
+    draw_inclination_angle(N) -> cosi_array
+
+# Arguments
+- `N::Int`: Number of planets.
+
+# Returns
+- `cosi_array`: Array of cosine of inclination angle for the planets.
+
+# Description
+Draw inclination angles cosine for N planets from a uniform distribution between 0 and 1
+"""
+function draw_inclination_angle(N::Int)
+    cosi_array = rand(Uniform(0, 1), N)
+    return cosi_array
+end
+
