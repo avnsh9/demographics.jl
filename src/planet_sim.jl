@@ -3,7 +3,7 @@ Simulate planetary systems and their dynamics.
 """
 
 """
-mass_ratio_sim(q_max::Float64, q_min::Float64, n::Float64) -> `<q>`::Float64
+    mass_ratio_sim(q_max::Float64, q_min::Float64, n::Float64) -> q::Float64
 
 # Arguments
 - `q_max::Float64`: Maximum mass ratio (planet mass / star mass).
@@ -36,6 +36,7 @@ end
 
 """
 mean_planet_N(β::Float64, q_mean::Float64) -> `<N>`::Float64
+
 # Arguments
 - `β::Float64`: sum of all planet mass / stellar mass.
 - `q_mean::Float64`: Mean of planet star mass ratio.
@@ -49,14 +50,19 @@ function mean_planet_N(β::Float64, q_mean::Float64) :: Float64
 end
 
 """
-random_q_sim(u::Float64, q_max::Float64, q_min::Float64, n::Float64) -> q::Float64
+    random_q_sim(u::Float64, q_max::Float64, q_min::Float64, n::Float64) -> q::Float64
+
 # Arguments
 - `u::Float64`: Random uniform variable between 0 and 1.
 - `q_max::Float64`: Maximum mass ratio (planet mass / star mass).
 - `q_min::Float64`: Minimum mass ratio (planet mass / star mass).
 - `n::Float64`: Power-law index for the mass ratio distribution.
+
 # Returns
 - `q::Float64`: Randomly sampled planet star mass ratio.
+
+# Description
+Randomly sampled planet star mass ratio.
 """
 function random_q_sim(u::Float64, q_max::Float64, q_min::Float64, n::Float64) :: Float64
     return (u*(q_max^n - q_min^n) + q_min^n)^(1/n)
@@ -115,7 +121,7 @@ function draw_orbital_eccentricity(N::Int, α::Float64, β::Float64)
 end
 
 """
-    draw_periastron angle(N) -> ω_array
+    draw_periastron_angle(N) -> ω_array
 
 # Arguments
 - `N::Int`: Number of planets.
