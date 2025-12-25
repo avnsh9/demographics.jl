@@ -3,7 +3,7 @@ Simulate planetary systems and their dynamics.
 """
 
 """
-    mass_ratio_sim(q_max::Float64, q_min::Float64, n::Float64) -> q::Float64
+    mass_ratio_sim(q_max, q_min, n) -> q_mean
 
 # Arguments
 - `q_max::Float64`: Maximum mass ratio (planet mass / star mass).
@@ -11,46 +11,56 @@ Simulate planetary systems and their dynamics.
 - `n::Float64`: Power-law index for the mass ratio distribution.
 
 # Returns
-- `<q>::Float64`: Mean of planet star mass ratio.
+- `q_mean::Float64`: Mean of planet star mass ratio.
+
+# Description
+Calculate mean planet/star mass ratio from distribution parameter. Priyadarshi et. al. (2025)
 
 """
-function mass_ratio_sim(q_max::Float64, q_min::Float64, n::Float64) :: Float64
+function mass_ratio_sim(q_max::T, q_min::T, n::T) where T<:AbstractFloat
     q_mean = n/(n+1)*(q_max^(n+1) - q_min^(n+1)) / (q_max^n - q_min^n)
     return q_mean
 end
 
 """
-orbit_seperation_sim(a_max::Float64, a_min::Float64, n::Float64) -> `<a>`::Float64
+    orbit_seperation_sim(a_max, a_min, n) -> a_mean
+
 # Arguments
 - `a_max::Float64`: Maximum orbital separation.
 - `a_min::Float64`: Minimum orbital separation.
 - `n::Float64`: Power-law index for the orbital separation distribution.
 
 # Returns
-- `<a>::Float64`: Mean of orbital separation.
+- `a::Float64`: Mean of orbital separation.
+
+Description
+Calculate mean orbit seperation of planet distribution from parameters. Priyadarshi et. al. (2025)
 """
-function orbit_seperation_sim(a_max::Float64, a_min::Float64, n::Float64) :: Float64
+function orbit_seperation_sim(a_max::T, a_min::T, n::T) where T<:AbstractFloat
     a_mean = n/(n+1)*(a_max^(n+1) - a_min^(n+1)) / (a_max^n - a_min^n)
     return a_mean
 end
 
 """
-mean_planet_N(β::Float64, q_mean::Float64) -> `<N>`::Float64
+    mean_planet_N(β, q_mean) -> N
 
 # Arguments
 - `β::Float64`: sum of all planet mass / stellar mass.
 - `q_mean::Float64`: Mean of planet star mass ratio.
 
 # Returns
-- `<N>::Float64`: Mean number of planets per star.
+- `N::Float64`: Mean number of planets per star.
+
+# Description
+Calculates mean of number of planets around a star based on mean mass. Priyadarshi et. al. (2025)
 """
-function mean_planet_N(β::Float64, q_mean::Float64) :: Float64
+function mean_planet_N(β::T, q_mean::T) where T<:AbstractFloat
     N_mean = β / q_mean
     return N_mean
 end
 
 """
-    random_q_sim(u::Float64, q_max::Float64, q_min::Float64, n::Float64) -> q::Float64
+    random_q_sim(u, q_max, q_min, n) -> q
 
 # Arguments
 - `u::Float64`: Random uniform variable between 0 and 1.
@@ -64,36 +74,42 @@ end
 # Description
 Randomly sampled planet star mass ratio.
 """
-function random_q_sim(u::Float64, q_max::Float64, q_min::Float64, n::Float64) :: Float64
+function random_q_sim(u::T, q_max::T, q_min::T, n::T) where T<:AbstractFloat
     return (u*(q_max^n - q_min^n) + q_min^n)^(1/n)
 end
 
 """
-random_a_sim(u::Float64, a_max::Float64, a_min::Float64, n::Float64) -> a::Float64
+    random_a_sim(u, a_max, a_min, n) -> a
+
 # Arguments
 - `u::Float64`: Random uniform variable between 0 and 1.
 - `a_max::Float64`: Maximum orbital separation.
 - `a_min::Float64`: Minimum orbital separation.
 - `n::Float64`: Power-law index for the orbital separation distribution.
+
 # Returns
 - `a::Float64`: Randomly sampled orbital separation.
+
+# Description
+Returns a randomly sampled orbit seperation value based on the distribution.
 """
-function random_a_sim(u::Float64, a_max::Float64, a_min::Float64, n::Float64) :: Float64
+function random_a_sim(u::T, a_max::T, a_min::T, n::T) where T<:AbstractFloat
     return (u*(a_max^n - a_min^n) + a_min^n)^(1/n)
 end
 
 
 
 """
-    draw_num_planets(meanN) -> num_planets::Int
+    draw_num_planets(meanN) -> num_planets
+
 # Arguments
 - `meanN::Float64`: Mean number of planets per star.    
+
 # Returns
 - `num_planets::Int`: number of actual planets for one star.
-# Description
 
-Draw the number of planets for one star from a Poisson distribution
-with mean ⟨N⟩.
+# Description
+Draw the number of planets for one star from a Poisson distribution with mean ⟨N⟩.
 """
 function draw_num_planets(meanN::Float64)
     return rand(Poisson(meanN))
