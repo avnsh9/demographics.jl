@@ -77,3 +77,25 @@ function transit_SNR(Rₚ::T, Rₛ::T, CDPP::T, T_dur::T, δ::T, Cont::T) where 
 end
 
 
+"""
+    get_P_det(x,C,A,B) -> P_det
+
+# Arguments
+- `x::Float64`: expected SNR of the transiting planet
+- `c::Float64`: maximum detection probability at high SNR
+- `α::Float64`: gamma function parameter (depend on number of transit)
+- `β::Float64`: gamma function parameter (depend on number of transit)
+
+# Returns
+- `P_det::Float64`: detection probability
+
+# Description
+Calculates the detection probability of a transiting planet given a SNR, unlike simple assumptions of detection of planet based on SNR, this takes a probabilistic approach. Hsu et al. (2019)
+"""
+function get_P_det(x::T, c::T, α::T, β::T) where T<:AbstractFloat
+
+    p, _ = gamma_inc(α, x/β)
+    return c * p
+end
+
+

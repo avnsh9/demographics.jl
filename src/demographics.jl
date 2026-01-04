@@ -3,6 +3,7 @@ Demographics package for simulating stellar and planetary systems.
 """
 module demographics
 using Distributions
+using SpecialFunctions
 
 
 # Write your package code here.

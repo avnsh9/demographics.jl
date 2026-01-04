@@ -131,7 +131,7 @@ end
 Draw orbital eccentricities for N planets from a Beta distribution with parameters α and β. Van Eylen & Albrecht
 2015
 """
-function draw_orbital_eccentricity(N::Int, α::Float64, β::Float64)
+function draw_orbital_eccentricity(N::Int, α::T, β::T) where T<:AbstractFloat
     e_array = rand(Beta(α, β), N)
     return e_array
 end
