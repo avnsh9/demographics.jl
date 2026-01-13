@@ -1,8 +1,4 @@
 """
-Simulate planetary systems and their dynamics.
-"""
-
-"""
     mass_ratio_sim(q_max, q_min, n) -> q_mean
 
 # Arguments
@@ -18,7 +14,7 @@ Calculate mean planet/star mass ratio from distribution parameter. Priyadarshi e
 
 """
 function mass_ratio_sim(q_max::T, q_min::T, n::T) where T<:AbstractFloat
-    q_mean = n/(n+1)*(q_max^(n+1) - q_min^(n+1)) / (q_max^n - q_min^n)
+    q_mean = n / (n + 1) * (q_max^(n + 1) - q_min^(n + 1)) / (q_max^n - q_min^n)
     return q_mean
 end
 
@@ -37,7 +33,7 @@ Description
 Calculate mean orbit seperation of planet distribution from parameters. Priyadarshi et. al. (2025)
 """
 function orbit_seperation_sim(a_max::T, a_min::T, n::T) where T<:AbstractFloat
-    a_mean = n/(n+1)*(a_max^(n+1) - a_min^(n+1)) / (a_max^n - a_min^n)
+    a_mean = n / (n + 1) * (a_max^(n + 1) - a_min^(n + 1)) / (a_max^n - a_min^n)
     return a_mean
 end
 
@@ -75,7 +71,7 @@ end
 Randomly sampled planet star mass ratio.
 """
 function random_q_sim(u::T, q_max::T, q_min::T, n::T) where T<:AbstractFloat
-    return (u*(q_max^n - q_min^n) + q_min^n)^(1/n)
+    return (u * (q_max^n - q_min^n) + q_min^n)^(1 / n)
 end
 
 """
@@ -94,7 +90,7 @@ end
 Returns a randomly sampled orbit seperation value based on the distribution.
 """
 function random_a_sim(u::T, a_max::T, a_min::T, n::T) where T<:AbstractFloat
-    return (u*(a_max^n - a_min^n) + a_min^n)^(1/n)
+    return (u * (a_max^n - a_min^n) + a_min^n)^(1 / n)
 end
 
 

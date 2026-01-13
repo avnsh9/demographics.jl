@@ -14,7 +14,7 @@ hr_cdpp(T)
 - Calculate one hour CDPP to get detectibility metric for TESS data.
 - Equation 1 from Kunimoto et al. (2022).
 """
-function hr_cdpp(T)
+function hr_cdpp(Temp::T, C0::T, C1::T, C2::T) where T<:AbstractFloat
     
-    return C0 + C1*10^(0.2*(T-10)) + C2*10^(0.4*(T-10))
+    return C0 + C1*10^(0.2*(Temp-10)) + C2*10^(0.4*(Temp-10))
 end
